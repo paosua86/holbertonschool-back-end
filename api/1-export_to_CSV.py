@@ -15,10 +15,9 @@ if __name__ == "__main__":
     data_user = requests.get("https://jsonplaceholder.typicode.com/users/{}"
                              .format(argv[1])).json()
 
-    with open('{}.cvs'.format(argv[1]), 'w') as f:
-        thewriter = csv.writer(f, quotechar='"', quoting=csv.QUOTE_ALL)
+    with open('{}.cvs'.format(argv[1]), 'w', newline='') as f:
+        thewriter = csv.writer(f, quoting=csv.QUOTE_ALL)
 
         for todo in todos:
-            row = [data_user['id'], data_user['username'],
-                   todo['completed'], todo['title']]
-            thewriter.writerow(row)
+            thewriter.writerow([data_user['id'], data_user['username'],
+                                todo['completed'], todo['title']])
